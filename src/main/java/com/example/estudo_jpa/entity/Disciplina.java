@@ -15,4 +15,12 @@ public class Disciplina {
     private Long id;
     @Column(nullable = false, name = "TX_NOME", length = 60)
     private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
