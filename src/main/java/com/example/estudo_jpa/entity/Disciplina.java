@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -15,4 +18,8 @@ public class Disciplina {
     private Long id;
     @Column(nullable = false, name = "TX_NOME", length = 60)
     private String nome;
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
