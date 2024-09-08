@@ -15,12 +15,32 @@ import java.util.List;
 public class DisciplinaController {
     @Autowired
     public DisciplinaServiceImpl disciplinaService;
-    @PostMapping("/salvar")
-    public ResponseEntity<Disciplina> salvarDisciplina(@RequestBody DisciplinaResponseDto disciplinaResponseDto){
+    @PostMapping("/save")
+    public ResponseEntity<Disciplina> saveDisciplina(@RequestBody DisciplinaResponseDto disciplinaResponseDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(disciplinaService.saveDisciplica(disciplinaResponseDto));
     }
     @GetMapping
     public ResponseEntity<List<Disciplina>> getDisciplinas(){
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaService.getAllDisciplina());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity getDisciplinaById(@PathVariable Long id){
+        if (disciplinaService.getById(id).isEmpty()){
+            return  ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(disciplinaService.getById(id));
+
+        }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDisciplina(@PathVariable Long id){
+        disciplinaService.deleteDisciplina(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Disciplina deletada");
+    }
+    @PutMapping("{id}")
+    public ResponseEntity updateDisciplina(@PathVariable Long id, @RequestBody DisciplinaResponseDto disciplinaResponseDto){
+        return ResponseEntity.ok(disciplinaService.updateDisciplina( disciplinaResponseDto, id));
+    }
+
 }
