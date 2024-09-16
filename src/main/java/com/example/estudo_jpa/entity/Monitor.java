@@ -33,17 +33,10 @@ public class Monitor {
     @JoinColumn(name = "ID_DISCIPLINA")
     private Disciplina disciplina;
 
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    //@OneToMany(mappedBy = "monitor", fetch = FetchType.LAZY)
-    //private Set<Conexao> conexoes = new HashSet<>();
-    //WRITE_ONLY nn deixa uma determinada informação ser exposta na serialização do json
-    // Lazy carraga dados sob demanda, enquanto Eager carrega todos os dados, realizando apenas uma consulta
-    // monitor é o nome do atributo criado na classe Conexao para receber o id do Monito
-    // set invés de List porque Set é mais otimizado na hora de realizar uma consulta pq utiliza hash
-    //@ManyToMany
-    //@JoinTable(name = "TBL_REL_MONITOR_DISPONIBILIDADE",
-    //        joinColumns = @JoinColumn(name = "ID_MONITOR"),
-    //        inverseJoinColumns = @JoinColumn(name = "ID_DISPONIBILIDADE"))
-    //private List<Disponibilidade> disponibilidades;
+    @ManyToMany
+    @JoinTable(name = "TBL_REL_MONITOR_DISPONIBILIDADE",
+            joinColumns = @JoinColumn(name = "ID_MONITOR"),
+            inverseJoinColumns = @JoinColumn(name = "ID_DISPONIBILIDADE"))
+    private List<Disponibilidade> disponibilidades;
 
 }

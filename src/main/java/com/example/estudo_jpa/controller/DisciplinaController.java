@@ -1,7 +1,7 @@
 package com.example.estudo_jpa.controller;
 
-import com.example.estudo_jpa.dto.DisciplinaResponseDTO;
-import com.example.estudo_jpa.dto.DisciplinaUpdateDTO;
+
+import com.example.estudo_jpa.dto.DisciplinaResponseDto;
 import com.example.estudo_jpa.service.DisciplinaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,18 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/disciplina")
 public class DisciplinaController {
     @Autowired
     public DisciplinaServiceImpl disciplinaService;
     @PostMapping("/save")
-    public ResponseEntity<DisciplinaResponseDTO> saveDisciplina(@RequestBody DisciplinaResponseDTO disciplinaResponseDto){
+    public ResponseEntity<DisciplinaResponseDto> saveDisciplina(@RequestBody DisciplinaResponseDto disciplinaResponseDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(disciplinaService.saveDisciplica(disciplinaResponseDto));
     }
     @GetMapping
-    public ResponseEntity<List<DisciplinaResponseDTO>> getDisciplinas(){
+    public ResponseEntity<List<DisciplinaResponseDto>> getDisciplinas(){
         return ResponseEntity.status(HttpStatus.OK).body(disciplinaService.getAllDisciplina());
     }
     @GetMapping("/{id}")
@@ -39,7 +38,7 @@ public class DisciplinaController {
         return ResponseEntity.status(HttpStatus.OK).body("Disciplina deletada");
     }
     @PutMapping("{id}")
-    public ResponseEntity updateDisciplina(@PathVariable Long id, @RequestBody DisciplinaUpdateDTO disciplinaResponseDto){
+    public ResponseEntity updateDisciplina(@PathVariable Long id, @RequestBody DisciplinaResponseDto disciplinaResponseDto){
         return ResponseEntity.ok(disciplinaService.updateDisciplina( disciplinaResponseDto, id));
     }
 }
